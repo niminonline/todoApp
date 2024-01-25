@@ -1,0 +1,52 @@
+<div class="card shadow mt-4">
+  <div class="card-header newclass">
+    <div>
+      <h2 class="siteTitle text-center text-3xl p-4">To do List</h2>
+      <h5 class="siteSubTitle text-center text-xl">
+        Hey, Good {{ greeting }}... It's {{ day }}
+      </h5>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter a task"
+          #titleInput
+        />
+        <button class="btn btn-outline-secondary" (click)="addTodo(titleInput)">
+          <i class="fa-solid fa-circle-plus fa-xl"></i>
+        </button>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item my-2" *ngFor="let item of todos">
+          <span>
+            <i
+              class="text-success"
+              (click)="onStatusChange(item.id, !item.isDone)"
+              [ngClass]="
+                item.isDone
+                  ? 'fa-solid fa-circle-check'
+                  : 'fa-regular fa-circle'
+              "
+            ></i>
+            {{ item.data }}
+            <span class="float-end">
+              <span
+                class="text-secondary update-button"
+                *ngIf="!item.isDone"
+                (click)="editTask(item.id)"
+              >
+                <i class="fa-solid fa-pen-to-square mx-2"></i>
+              </span>
+              <span class="text-secondary" (click)="onDelete(item.id)">
+                <i class="fa-solid fa-trash-can"> </i>
+              </span>
+            </span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
